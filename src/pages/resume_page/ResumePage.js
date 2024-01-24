@@ -2,7 +2,7 @@ import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import { AiOutlineDownload } from "react-icons/ai";
 import Particle from "../../Particle";
-import pdf from "../../assets/shahzad.pdf";
+import pdf from "../../assets/Shahzad_Resume.pdf";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import Zoom from "react-reveal/Zoom";
