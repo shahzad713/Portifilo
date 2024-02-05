@@ -11,6 +11,7 @@ import {
 import { FaBlog } from "react-icons/fa";
 import "../../style.css";
 import { CgFileDocument } from "react-icons/cg";
+import logo from '../../logo.jpg'
 export default function MyNav() {
   const [expand, updateExpanded] = useState(false);
   const [navColour, updateNavbar] = useState(false);
@@ -35,7 +36,7 @@ export default function MyNav() {
       <Container>
         <Navbar.Brand href="/">
           <div className="d-flex flex-row justify-content-between">
-            <img src="./shahzad713.jpeg" className="img-fluid logo" alt="brand" style={{borderRadius: '20px'}}/>
+            <img src={logo} className="img-fluid logo" alt="brand" style={{ borderRadius: '20px' }} />
             <h5
               id="navhead"
               style={{
@@ -44,7 +45,7 @@ export default function MyNav() {
                 color: "#fbd9ad",
               }}
             >
-              Shahzad Munir
+              Smart Dev
             </h5>
           </div>
         </Navbar.Brand>
