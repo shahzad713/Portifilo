@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  VerticalTimeline,
-  VerticalTimelineElement,
-} from "react-vertical-timeline-component";
 import { Link } from "react-router-dom";
+import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import StarIcon from "@mui/icons-material/Star";
-import ComputerIcon from "@mui/icons-material/Computer";
 import {
   DiHtml5,
   DiPython,
   DiReact,
-  DiPhp,
-  DiJava,
   DiCss3,
   DiJavascript1,
   DiMysql,
@@ -19,19 +13,41 @@ import {
 } from "react-icons/di";
 import Flip from "react-reveal/Flip";
 
+const buttonStyle = { margin: "1rem" };
+const timelineElementStyle = {
+  className: "vertical-timeline-element--work",
+  contentStyle: { background: "rgb(78 22 112)", color: "#fbd9ad" },
+  contentArrowStyle: { borderRight: "7px solid  rgb(78 22 112)" },
+  date: "",
+  iconStyle: { background: "rgb(78 22 112)", color: "#fbd9ad" },
+};
+
+function Button({ to, children }) {
+  return (
+    <Link className="btn btn-primary m-1" style={buttonStyle} to={to}>
+      {children}
+    </Link>
+  );
+}
+
+function generateTimelineElement(icon, title) {
+  return (
+    <VerticalTimelineElement
+      {...timelineElementStyle}
+      icon={icon}
+    >
+      <h3 className="vertical-timeline-element-title">{title}</h3>
+    </VerticalTimelineElement>
+  );
+}
+
 function TechnicalJourney() {
   return (
-    <div className="mt-5">
-      <div>
-        <Link className="btn btn-primary m-1" to="/educationjourney">
-          Educational Journey
-        </Link>
-        <Link className="btn btn-primary m-1" to="/experiencejourney">
-          Experience Journey
-        </Link>
-        <Link className="btn btn-primary m-1" to="/technicaljourney">
-          Technical Journey
-        </Link>
+    <>
+      <div className="mt-5">
+        <Button to="/educationjourney">Educational Journey</Button>
+        <Button to="/experiencejourney">Experience Journey</Button>
+        <Button to="/technicaljourney">Technical Journey</Button>
       </div>
       <div className="mt-5">
         <Flip top cascade>
@@ -39,82 +55,19 @@ function TechnicalJourney() {
         </Flip>
       </div>
       <VerticalTimeline>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          contentStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          contentArrowStyle={{ borderRight: "7px solid  rgb(78 22 112)" }}
-          date=""
-          iconStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          icon={<DiHtml5 />}
-        >
-          <h3 className="vertical-timeline-element-title">HTML</h3>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          contentStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          contentArrowStyle={{ borderRight: "7px solid  rgb(78 22 112)" }}
-          date=""
-          iconStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          icon={<DiCss3 />}
-        >
-          <h3 className="vertical-timeline-element-title">CSS</h3>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          contentStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          contentArrowStyle={{ borderRight: "7px solid  rgb(78 22 112)" }}
-          date=""
-          iconStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          icon={<DiJavascript1 />}
-        >
-          <h3 className="vertical-timeline-element-title">JAVASCRIPT</h3>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          contentStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          contentArrowStyle={{ borderRight: "7px solid  rgb(78 22 112)" }}
-          date=""
-          iconStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          icon={<DiMysql />}
-        >
-          <h3 className="vertical-timeline-element-title">MySQL</h3>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          contentStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          contentArrowStyle={{ borderRight: "7px solid  rgb(78 22 112)" }}
-          date=""
-          iconStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          icon={<DiNodejs />}
-        >
-          <h3 className="vertical-timeline-element-title">NODE JS</h3>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          contentStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          contentArrowStyle={{ borderRight: "7px solid  rgb(78 22 112)" }}
-          date=""
-          iconStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          icon={<DiReact />}
-        >
-          <h3 className="vertical-timeline-element-title">REACT</h3>
-        </VerticalTimelineElement>
-        <VerticalTimelineElement
-          className="vertical-timeline-element--work"
-          contentStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          contentArrowStyle={{ borderRight: "7px solid  rgb(78 22 112)" }}
-          date=""
-          iconStyle={{ background: "rgb(78 22 112)", color: "#fbd9ad" }}
-          icon={<DiPython />}
-        >
-          <h3 className="vertical-timeline-element-title">PYTHON</h3>
-        </VerticalTimelineElement>
+        {generateTimelineElement(<DiHtml5 />, "HTML")}
+        {generateTimelineElement(<DiCss3 />, "CSS")}
+        {generateTimelineElement(<DiJavascript1 />, "JAVASCRIPT")}
+        {generateTimelineElement(<DiMysql />, "MySQL")}
+        {generateTimelineElement(<DiNodejs />, "NODE JS")}
+        {generateTimelineElement(<DiReact />, "REACT")}
+        {generateTimelineElement(<DiPython />, "PYTHON")}
         <VerticalTimelineElement
           iconStyle={{ background: "#fbd9ad", color: "rgb(78 22 112)" }}
           icon={<StarIcon />}
         />
       </VerticalTimeline>
-    </div>
+    </>
   );
 }
 
