@@ -1,42 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import Zoom from "react-reveal/Zoom";
 import axios from "axios";
-import { useState } from "react";
 import { AiOutlineSend } from "react-icons/ai";
 import { FiPhone, FiAtSign } from "react-icons/fi";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
 export default function Contactus() {
-  const [formData, setFormData] = useState(new FormData());
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!(formData.name && formData.email && formData.message)) {
-      alert("Something went wrong!");
+    const { name, email, message } = formData;
+    if (!(name && email && message)) {
+      alert("Please fill in all fields.");
       return;
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/submitForm",
-        formData
-      );
+      const response = await axios.post("http://localhost:5000/api/submitForm", formData);
       console.log(response.data.message); // Log the response from the backend
-
-      alert(`Thanks ${formData.name}, I will shortly connect with you!`);
+      alert(`Thanks ${name}, I will shortly connect with you!`);
     } catch (error) {
       console.error("Error submitting the form:", error);
-
-      alert("Backend Server was not Running while submitting the form.");
+      alert("There was an issue submitting the form. Please try again later.");
     }
 
-    setFormData({});
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
@@ -44,10 +40,7 @@ export default function Contactus() {
       <Container fluid className="certificate-section" id="about">
         <Container>
           <Row>
-            <Col
-              md={12}
-              className="certificate-description d-flex justify-content-start"
-            >
+            <Col md={12} className="certificate-description d-flex justify-content-start">
               <Zoom left cascade>
                 <h1 className="aboutme-heading">Contact me</h1>
               </Zoom>
@@ -68,7 +61,7 @@ export default function Contactus() {
                           name="name"
                           aria-describedby="emailHelp"
                           placeholder="Enter your name"
-                          value={formData.name || ""}
+                          value={formData.name}
                           onChange={handleChange}
                         />
                       </div>
@@ -83,7 +76,7 @@ export default function Contactus() {
                           id="email"
                           aria-describedby="emailHelp"
                           placeholder="Enter email"
-                          value={formData.email || ""}
+                          value={formData.email}
                           onChange={handleChange}
                         />
                       </div>
@@ -97,7 +90,7 @@ export default function Contactus() {
                           name="message"
                           rows="3"
                           placeholder="Enter message"
-                          value={formData.message || ""}
+                          value={formData.message}
                           onChange={handleChange}
                         />
                       </div>
@@ -108,8 +101,7 @@ export default function Contactus() {
                           className="submitBtn"
                           onClick={handleSubmit}
                         >
-                          Submit
-                          <AiOutlineSend className="send-icon" />
+                          Submit <AiOutlineSend className="send-icon" />
                         </button>
                       </div>
                     </form>
@@ -117,35 +109,24 @@ export default function Contactus() {
                 </Col>
                 <Col md={7}>
                   <div className="contacts-details">
-                    <a
-                      href={`mailto:munirshahzad044@gmail.com`}
-                      className="personal-details"
-                    >
+                    <a href="mailto:munirshahzad044@gmail.com" className="personal-details">
                       <div className="detailsIcon">
                         <FiAtSign />
                       </div>
-                      <p style={{ color: "#fbd9ad" }}>
-                        munirshahzad044@gmail.com
-                      </p>
+                      <p style={{ color: "#fbd9ad" }}>munirshahzad044@gmail.com</p>
                     </a>
-                    <a
-                      href={`tel:+92 3057948630`}
-                      className="personal-details"
-                    >
+                    <a href="tel:+923057948630" className="personal-details">
                       <div className="detailsIcon">
                         <FiPhone />
                       </div>
                       <p style={{ color: "#fbd9ad" }}>+92 3057948630</p>
                     </a>
-                   
-                      <div className="personal-details">
-                        <div className="detailsIcon">
-                          <HiOutlineLocationMarker />
-                        </div>
-                        <p style={{ color: "#fbd9ad" }}>
-                        Bhaira-Town Lahore
-                        </p>
+                    <div className="personal-details">
+                      <div className="detailsIcon">
+                        <HiOutlineLocationMarker />
                       </div>
+                      <p style={{ color: "#fbd9ad" }}>Bhaira-Town Lahore</p>
+                    </div>
                   </div>
                 </Col>
               </Row>
