@@ -1,17 +1,22 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import vs from "../../../images/Vs.png";
-import pc from "../../../images/pc.png";
 import git from "../../../images/git.png";
 import github from "../../../images/github.png";
-import cb from "../../../images/cb.png";
-import pg from "../../../images/pg.png";
 import pm from "../../../images/pm.png";
 import chrome from "../../../images/chorme.svg";
 import { Link } from "react-router-dom";
 import Zoom from "react-reveal/Zoom";
 
 export default function Toolkit() {
+  const tools = [
+    { src: vs, alt: "Visual Studio", width: "85%", height: "85%" },
+    { src: git, alt: "Git", width: "85%", height: "85%" },
+    { src: github, alt: "GitHub", width: "85%", height: "85%", filter: "grayscale(1) invert(1)" },
+    { src: pm, alt: "Package Manager", width: "95%", height: "95%" },
+    { src: chrome, alt: "Google Chrome", width: "95%", height: "95%" },
+  ];
+
   return (
     <div>
       <div className="mt-5 d-flex flex-row justify-content-center">
@@ -30,29 +35,11 @@ export default function Toolkit() {
       </Zoom>
       <Container className="mt-4">
         <Row style={{ justifyContent: "center", paddingBottom: "50px" }}>
-          <Col xs={4} md={2} className="tech-icons">
-            <img src={vs} alt="" style={{ width: "85%", height: "85%" }} />
-          </Col>
-          <Col xs={4} md={2} className="tech-icons">
-            <img src={git} alt="" style={{ width: "85%", height: "85%" }} />
-          </Col>
-          <Col xs={4} md={2} className="tech-icons">
-            <img
-              src={github}
-              alt=""
-              style={{
-                width: "85%",
-                height: "85%",
-                filter: "grayscale(1) invert(1)",
-              }}
-            />
-          </Col>
-          <Col xs={4} md={2} className="tech-icons">
-            <img src={pm} alt="" style={{ width: "95%", height: "95%" }} />
-          </Col>
-          <Col xs={4} md={2} className="tech-icons">
-            <img src={chrome} alt="" style={{ width: "95%", height: "95%" }} />
-          </Col>
+          {tools.map((tool, index) => (
+            <Col key={index} xs={4} md={2} className="tech-icons">
+              <img src={tool.src} alt={tool.alt} style={{ width: tool.width, height: tool.height, ...(tool.filter && { filter: tool.filter }) }} />
+            </Col>
+          ))}
         </Row>
       </Container>
     </div>
